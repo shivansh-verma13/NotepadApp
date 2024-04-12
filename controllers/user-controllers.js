@@ -16,7 +16,7 @@ export const userRegister = async (req, res) => {
 
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
-      domain: "nottepaddapp.netlify.app",
+      domain: "nottepaddapp.netlify.app/",
       signed: true,
       path: "/",
       secure: true,
@@ -30,7 +30,7 @@ export const userRegister = async (req, res) => {
       signed: true,
       expires,
       path: "/",
-      domain: "nottepaddapp.netlify.app",
+      domain: "nottepaddapp.netlify.app/",
       secure: true,
     });
 
@@ -60,7 +60,7 @@ export const userLogin = async (req, res) => {
     res.clearCookie(COOKIE_NAME, {
       httpOnly: true,
       signed: true,
-      domain: "nottepaddapp.netlify.app",
+      domain: "nottepaddapp.netlify.app/",
       path: "/",
       secure: true,
     });
@@ -72,7 +72,7 @@ export const userLogin = async (req, res) => {
       httpOnly: true,
       signed: true,
       expires,
-      domain: "nottepaddapp.netlify.app",
+      domain: "nottepaddapp.netlify.app/",
       path: "/",
       secure: true,
     });
@@ -122,7 +122,7 @@ export const userLogout = async (req, res) => {
       httpOnly: true,
       signed: true,
       path: "/",
-      domain: "nottepaddapp.netlify.app",
+      domain: "nottepaddapp.netlify.app/",
       secure: true,
     });
 
