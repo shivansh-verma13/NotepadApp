@@ -19,6 +19,7 @@ export const userRegister = async (req, res) => {
       domain: "nottepaddapp.netlify.app",
       signed: true,
       path: "/",
+      secure: true,
     });
 
     const token = createToken(username, user._id.toString(), "7d");
@@ -30,6 +31,7 @@ export const userRegister = async (req, res) => {
       expires,
       path: "/",
       domain: "nottepaddapp.netlify.app",
+      secure: true,
     });
 
     return res
@@ -60,6 +62,7 @@ export const userLogin = async (req, res) => {
       signed: true,
       domain: "nottepaddapp.netlify.app",
       path: "/",
+      secure: true,
     });
 
     const token = createToken(username, existingUser._id.toString(), "7d");
@@ -71,6 +74,7 @@ export const userLogin = async (req, res) => {
       expires,
       domain: "nottepaddapp.netlify.app",
       path: "/",
+      secure: true,
     });
 
     return res
@@ -118,7 +122,8 @@ export const userLogout = async (req, res) => {
       httpOnly: true,
       signed: true,
       path: "/",
-      domian: "nottepaddapp.netlify.app",
+      domain: "nottepaddapp.netlify.app",
+      secure: true,
     });
 
     return res.status(200).json({ message: "User logged out" });
