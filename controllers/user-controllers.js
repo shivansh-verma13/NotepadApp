@@ -14,9 +14,9 @@ export const userRegister = async (req, res) => {
     const user = new UserModel({ name, username, password: hashedPassword });
     await user.save();
 
-    res.clearCookie(COOKIE_NAME, {
+    res.clearCookie("notepad-token", {
       httpOnly: true,
-      domain: "nottepaddapp.netlify.app/",
+      domain: "nottepaddapp.netlify.app",
       signed: true,
       path: "/",
       secure: true,
@@ -25,12 +25,12 @@ export const userRegister = async (req, res) => {
     const token = createToken(username, user._id.toString(), "7d");
     const expires = new Date();
     expires.setDate(expires.getDate() + 7);
-    res.cookie(COOKIE_NAME, token, {
+    res.cookie("notepad-token", token, {
       httpOnly: true,
       signed: true,
       expires,
       path: "/",
-      domain: "nottepaddapp.netlify.app/",
+      domain: "nottepaddapp.netlify.app",
       secure: true,
     });
 
@@ -57,10 +57,10 @@ export const userLogin = async (req, res) => {
         .json({ message: "Incorrect Password or Username" });
     }
 
-    res.clearCookie(COOKIE_NAME, {
+    res.clearCookie("notepad-token", {
       httpOnly: true,
       signed: true,
-      domain: "nottepaddapp.netlify.app/",
+      domain: "nottepaddapp.netlify.app",
       path: "/",
       secure: true,
     });
@@ -68,11 +68,11 @@ export const userLogin = async (req, res) => {
     const token = createToken(username, existingUser._id.toString(), "7d");
     const expires = new Date();
     expires.setDate(expires.getDate() + 7);
-    res.cookie(COOKIE_NAME, token, {
+    res.cookie("notepad-token", token, {
       httpOnly: true,
       signed: true,
       expires,
-      domain: "nottepaddapp.netlify.app/",
+      domain: "nottepaddapp.netlify.app",
       path: "/",
       secure: true,
     });
@@ -118,11 +118,11 @@ export const userLogout = async (req, res) => {
       return res.status(401).json({ message: "User Authorization Failed" });
     }
 
-    res.clearCookie(COOKIE_NAME, {
+    res.clearCookie("notepad-token", {
       httpOnly: true,
       signed: true,
       path: "/",
-      domain: "nottepaddapp.netlify.app/",
+      domain: "nottepaddapp.netlify.app",
       secure: true,
     });
 
