@@ -7,7 +7,12 @@ import router from "./routes/index.js";
 config();
 const app = express();
 
-app.use(cors({ origin: "https://nottepaddapp.netlify.app", credentials: true }));
+app.use(
+  cors({
+    origin: "https://66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
