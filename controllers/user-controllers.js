@@ -16,9 +16,9 @@ export const userRegister = async (req, res) => {
 
     res.clearCookie("notepad-token", {
       httpOnly: true,
-      domain: process.env.DOMAIN_FRONTEND,
+      domain: "netlify.app",
       signed: true,
-      secure: process.env.NODE_ENV === "production" ?? true,
+      secure: true,
     });
 
     const token = createToken(username, user._id.toString(), "7d");
@@ -27,9 +27,9 @@ export const userRegister = async (req, res) => {
     res.cookie("notepad-token", token, {
       httpOnly: true,
       signed: true,
-      domain: process.env.DOMAIN_FRONTEND,
+      domain: "netlify.app",
       sameSite: "none",
-      secure: process.env.NODE_ENV === "production" ?? true,
+      secure: true,
       expires,
     });
 
@@ -59,9 +59,9 @@ export const userLogin = async (req, res) => {
     res.clearCookie("notepad-token", {
       httpOnly: true,
       signed: true,
-      domain: "localhost",
+      domain: "netlify.app",
       path: "/",
-      // secure: true,
+      secure: true,
     });
 
     const token = createToken(username, existingUser._id.toString(), "7d");
@@ -71,9 +71,9 @@ export const userLogin = async (req, res) => {
       httpOnly: true,
       signed: true,
       expires,
-      domain: "localhost",
+      domain: "netlify.app",
       path: "/",
-      // secure: true,
+      secure: true,
     });
 
     return res
@@ -121,8 +121,8 @@ export const userLogout = async (req, res) => {
       httpOnly: true,
       signed: true,
       path: "/",
-      domain: "localhost",
-      // secure: true,
+      domain: "netlify.app",
+      secure: true,
     });
 
     return res.status(200).json({ message: "User logged out" });
