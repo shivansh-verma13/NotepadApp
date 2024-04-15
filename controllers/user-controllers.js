@@ -16,10 +16,9 @@ export const userRegister = async (req, res) => {
 
     res.clearCookie("notepad-token", {
       httpOnly: true,
-      domain: "66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
+      domain: process.env.DOMAIN_FRONTEND,
       signed: true,
-      path: "/",
-      secure: true,
+      secure: process.env.NODE_ENV === "production" ?? true,
     });
 
     const token = createToken(username, user._id.toString(), "7d");
@@ -28,10 +27,10 @@ export const userRegister = async (req, res) => {
     res.cookie("notepad-token", token, {
       httpOnly: true,
       signed: true,
+      domain: process.env.DOMAIN_FRONTEND,
+      sameSite: "none",
+      secure: process.env.NODE_ENV === "production" ?? true,
       expires,
-      path: "/",
-      domain: "66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
-      secure: true,
     });
 
     return res
@@ -60,9 +59,9 @@ export const userLogin = async (req, res) => {
     res.clearCookie("notepad-token", {
       httpOnly: true,
       signed: true,
-      domain: "66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
+      domain: "localhost",
       path: "/",
-      secure: true,
+      // secure: true,
     });
 
     const token = createToken(username, existingUser._id.toString(), "7d");
@@ -72,9 +71,9 @@ export const userLogin = async (req, res) => {
       httpOnly: true,
       signed: true,
       expires,
-      domain: "66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
+      domain: "localhost",
       path: "/",
-      secure: true,
+      // secure: true,
     });
 
     return res
@@ -122,8 +121,8 @@ export const userLogout = async (req, res) => {
       httpOnly: true,
       signed: true,
       path: "/",
-      domain: "66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
-      secure: true,
+      domain: "localhost",
+      // secure: true,
     });
 
     return res.status(200).json({ message: "User logged out" });

@@ -9,7 +9,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://66193a2a14a1d11fb58c417d--nottepaddapp.netlify.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
